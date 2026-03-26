@@ -5,7 +5,7 @@ const { db, User, Task } = require('./database/setup');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
@@ -340,6 +340,9 @@ app.use((req, res) => {
         message: `${req.method} ${req.path} is not a valid endpoint`
     });
 });
+
+const cors = require('cors');
+app.use(cors());
 
 // Start server
 app.listen(PORT, () => {
